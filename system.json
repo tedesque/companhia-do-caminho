@@ -2,10 +2,11 @@
   "id": "companhia-do-caminho",
   "title": "Companhia do Caminho",
   "description": "Protótipo doméstico em português — regras 0.3. Ficha, testes e recursos. Alvo: Foundry VTT 14, Build 360; validação no aplicativo pendente.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "compatibility": {
     "minimum": "14",
-    "maximum": "14"
+    "maximum": "14",
+    "verified": "14.0"
   },
   "authors": [
     {
@@ -31,5 +32,5 @@
   },
   "url": "https://github.com/tedesque/companhia-do-caminho",
   "manifest": "https://github.com/tedesque/companhia-do-caminho/releases/latest/download/system.json",
-  "download": "https://github.com/tedesque/companhia-do-caminho/releases/download/v0.1.0/companhia-do-caminho.zip"
+  "download": "https://github.com/tedesque/companhia-do-caminho/releases/download/v0.1.1/companhia-do-caminho.zip"
 }

@@ -1,4 +1,4 @@
-# Validação — Companhia do Caminho 0.1.0
+# Validação — Companhia do Caminho 0.1.1
 
 Alvo: Foundry VTT 14 Stable — Build 360.
 Base mecânica: croqui Companhia do Caminho 0.3.
@@ -10,6 +10,6 @@ Resultado: 25 testes automatizados passaram, zero falhas.
 
 JSON e caminhos de entrada do manifesto conferidos. Código-fonte e testes acompanham o ZIP.
 
-Não foi executada uma instalação licenciada do Foundry neste ambiente. A renderização real, o fluxo de gravação no servidor, as permissões entre usuários, a visibilidade de chat e o funcionamento ponta a ponta no Build 360 aguardam validação no aplicativo. Por esse motivo não se declara compatibilidade verified.
+Não foi executada uma instalação licenciada do Foundry neste ambiente. A renderização real, o fluxo de gravação no servidor, as permissões entre usuários, a visibilidade de chat e o funcionamento ponta a ponta no Build 360 aguardam validação no aplicativo. O manifesto usa a referência técnica 14.0: builds reais V14 permanecem UNVERIFIED_BUILD. Isso elimina UNKNOWN e não declara validação ponta a ponta.
 
 O arquivo LEIA-ME.md contém o roteiro de aceitação no Foundry e os limites conhecidos do protótipo.
