@@ -20,4 +20,10 @@ jobs:
       - name: Publicar release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/system.json dist/companhia-do-caminho.zip --title "Companhia do Caminho $GITHUB_REF_NAME" --generate-notes --verify-tag
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/system.json dist/companhia-do-caminho.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/system.json dist/companhia-do-caminho.zip --title "Companhia do Caminho $GITHUB_REF_NAME" --generate-notes --verify-tag
+          fi
+
