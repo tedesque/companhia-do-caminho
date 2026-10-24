@@ -3,10 +3,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const example=JSON.parse(fs.readFileSync(new URL('../examples/comerciante.json',import.meta.url)));
-let dialogs=[],dice=[],chats=[],errors=[],updates=[],hooks={};
+let dialogs=[],dice=[],chats=[],errors=[],updates=[],hooks={},dialogConfigs=[];
 class Field{constructor(options){this.options=options;}}
 class Sheet{async _prepareContext(){return {editable:true};}async submit(){} }
-globalThis.foundry={data:{fields:{NumberField:Field,StringField:Field,BooleanField:Field,SchemaField:Field}},abstract:{TypeDataModel:class{}},applications:{api:{HandlebarsApplicationMixin:C=>C,DialogV2:{wait:async()=>dialogs.shift(),confirm:async()=>dialogs.shift()}},sheets:{ActorSheetV2:Sheet}},documents:{collections:{Actors:{registerSheet:(...args)=>{globalThis.registered=args;}}}}};
+globalThis.foundry={data:{fields:{NumberField:Field,StringField:Field,BooleanField:Field,SchemaField:Field}},abstract:{TypeDataModel:class{}},applications:{api:{HandlebarsApplicationMixin:C=>C,DialogV2:{wait:async config=>{dialogConfigs.push(config);return dialogs.shift();},confirm:async()=>dialogs.shift()}},sheets:{ActorSheetV2:Sheet}},documents:{collections:{Actors:{registerSheet:(...args)=>{globalThis.registered=args;}}}}};
 globalThis.Hooks={once:(event,fn)=>{hooks[event]=fn;}};
 globalThis.CONFIG={Actor:{dataModels:{}}};
 globalThis.ui={notifications:{warn:m=>errors.push(m),error:m=>errors.push(m)}};
@@ -19,7 +19,7 @@ globalThis.Roll=class{
 function actor(id='a'){
   return {id,uuid:`Actor.${id}`,name:'Exemplo',type:'personagem',isOwner:true,system:structuredClone(example.system),async update(change){updates.push({id,change});for(const [key,value]of Object.entries(change)){const path=key.split('.');let target=this;for(const part of path.slice(0,-1))target=target[part];target[path.at(-1)]=value;}}};
 }
-function setup(a){dialogs=[];dice=[];chats=[];errors=[];updates=[];
+function setup(a){dialogConfigs=[];dialogs=[];dice=[];chats=[];errors=[];updates=[];
   const actors=[a];actors.get=id=>actors.find(a=>a.id===id);
   globalThis.game={actors,user:{isGM:true},settings:{register:()=>{},get:()=>true}};return actors;
 }
@@ -90,4 +90,20 @@ test('Chat conserva os dois d12 com escolhido e descartado e identifica a quanti
   assert.match(content,/d12: 9, escolhido/);assert.match(content,/d12: Olho \(0\), descartado/);
   assert.doesNotMatch(content,/narradora|Consequências de falha/);
   assert.equal(a.system.hope.value,12);assert.equal(a.system.specialtyUsed,true);
+});
+
+test('Escolha usa HTML no conteúdo e rótulo de botão em texto simples',async()=>{
+  const a=actor();setup(a);dialogs.push({specialty:true,modifier:0},1);dice.push({feats:[3,8],dice:[2,2,2]});
+  await rollSkill(a,'persuade');const choice=dialogConfigs[1];
+  assert.match(choice.content,/type="radio" name="chosen" value="0"/);
+  assert.match(choice.content,/d12: 3/);assert.match(choice.content,/d12: 8/);
+  assert.equal(choice.buttons[0].label,'Escolher');
+  assert.equal(choice.buttons[0].callback(null,{form:{elements:{chosen:{value:'1'}}}}),1);
+  assert.equal(chats[0].data.flags['companhia-do-caminho'].chosen,1);
+});
+test('D12 e d6 possuem geometria de faces e valor separado acessível',()=>{
+  for(const faces of [12,6]){
+    const icon=dieIcon(faces,4);assert.match(icon,/viewBox="0 0 64 64"/);
+    assert.match(icon,/class="cdc-die-value">4/);assert.match(icon,/<path /);
+  }
 });
