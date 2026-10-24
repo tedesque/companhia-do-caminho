@@ -1,0 +1,23 @@
+name: Publicar sistema Foundry
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Testar
+        run: node --test tests/*.test.mjs
+      - name: Preparar arquivos da release
+        run: python3 tools/build_release.py --repository "$GITHUB_REPOSITORY" --tag "$GITHUB_REF_NAME"
+      - name: Publicar release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/system.json dist/companhia-do-caminho.zip --title "Companhia do Caminho $GITHUB_REF_NAME" --generate-notes --verify-tag

@@ -1,0 +1,59 @@
+{
+  "name": "Comerciante de tecidos — nome a definir",
+  "type": "personagem",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "attributes": {
+      "body": 5,
+      "spirit": 6,
+      "wit": 4
+    },
+    "skills": {
+      "athletics": 0,
+      "travel": 2,
+      "stealth": 0,
+      "craft": 1,
+      "handling": 0,
+      "readiness": 0,
+      "encourage": 0,
+      "courtesy": 2,
+      "persuade": 3,
+      "negotiate": 2,
+      "insight": 2,
+      "report": 0,
+      "observe": 0,
+      "navigate": 0,
+      "investigate": 0,
+      "heal": 0,
+      "lore": 0,
+      "supplies": 2
+    },
+    "resistance": {
+      "value": 28
+    },
+    "hope": {
+      "value": 12
+    },
+    "load": 5,
+    "fatigue": 0,
+    "reservedPoints": 2,
+    "origin": "judea",
+    "role": "mediator",
+    "specialty": "persuade",
+    "originUsed": false,
+    "specialtyUsed": false,
+    "shaken": false,
+    "wounded": false,
+    "background": {
+      "occupation": "Comerciante de tecidos; banca numa cidade",
+      "grewUp": "Judeia — cidade a definir",
+      "citizenship": "Sem cidadania romana",
+      "languages": "Grego e aramaico",
+      "literacy": "Lê e escreve grego e aramaico",
+      "motivation": "Após ouvir a pregação dos apóstolos e viver uma experiência pessoal com o Espírito Santo, decidiu colocar suas capacidades a serviço da comunidade.",
+      "tension": "Ao afastar-se da banca, teme ficar sem sustento e vive com sensação de insegurança.",
+      "equipment": "Conjunto básico (Carga 5): roupa, calçado, bolsa, recipiente de água, manta, comida para três dias e ferramentas simples. Quantidades consumidas durante a aventura são anotadas manualmente.",
+      "notes": "Nome e dois traços ainda a escolher. Dois pontos escolhidos como Subterfúgio permanecem reservados: esse nome não existe na lista 0.3; decidir com o jogador antes de distribuir. Ofício manual corresponde a Ofício 1. Estado após Uma manta antes da noite: Resistência 28, Esperança 12, Fadiga 0. Costume aprendido para o benefício cultural ainda deve ser definido."
+    }
+  }
+}

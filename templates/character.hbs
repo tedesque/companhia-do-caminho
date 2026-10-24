@@ -1,0 +1,62 @@
+<section class="cdc-body">
+  <header class="cdc-hero"><div class="cdc-eyebrow">COMPANHIA DO CAMINHO · PROTÓTIPO 0.1</div>
+    <h1>{{actor.name}}</h1><p>Uma companhia. Um caminho. Pessoas a quem servir.</p>
+    <div class="cdc-badges"><span>Regras 0.3</span>{{#if weary}}<strong class="cdc-warning">Cansado</strong>{{/if}}{{#if incapacitated}}<strong class="cdc-warning">Incapacitado para esforço</strong>{{/if}}</div>
+  </header>
+  <fieldset {{#if readOnly}}disabled{{/if}}>
+  <div class="cdc-identity">
+    <label>Nome<input type="text" name="name" value="{{actor.name}}"></label>
+    <label>Idade aproximada<input name="system.background.age" value="{{s.background.age}}"></label>
+    <label>Ofício anterior<input name="system.background.occupation" value="{{s.background.occupation}}"></label>
+  </div>
+  <div class="cdc-resources">
+    <label>Resistência <span>/ {{s.resistance.max}}</span><input type="number" min="0" max="{{s.resistance.max}}" name="system.resistance.value" value="{{s.resistance.value}}" data-dtype="Number"></label>
+    <label>Esperança <span>/ {{s.hope.max}}</span><input type="number" min="0" max="{{s.hope.max}}" name="system.hope.value" value="{{s.hope.value}}" data-dtype="Number"></label>
+    <label>Carga<input type="number" min="0" name="system.load" value="{{s.load}}" data-dtype="Number"></label>
+    <label>Fadiga<input type="number" min="0" name="system.fatigue" value="{{s.fatigue}}" data-dtype="Number"></label>
+  </div>
+  <p class="cdc-hint">Cansado quando Resistência ≤ Carga + Fadiga. Nesse estado, 1–3 nos d6 valem zero.</p>
+  <div class="cdc-checks"><label><input type="checkbox" name="system.shaken" {{checked s.shaken}}> Abalado (narrativo)</label><label><input type="checkbox" name="system.wounded" {{checked s.wounded}}> Ferido (regra pendente)</label></div>
+  <h2>Atributos e perícias</h2><p class="cdc-hint">Clique no nome da perícia para rolar. Número-alvo = 20 − atributo.</p>
+  <div class="cdc-columns">
+    {{#each attributes}}<section class="cdc-attribute"><div class="cdc-attribute-head"><h3>{{label}}</h3><input aria-label="{{label}}" type="number" min="0" max="10" name="system.attributes.{{key}}" value="{{value}}" data-dtype="Number"><span>Alvo <b>{{target}}</b></span></div>
+    {{#each skills}}<div class="cdc-skill"><button type="button" data-action="roll" data-skill="{{id}}">{{label}}</button><input aria-label="Nível de {{label}}" type="number" name="system.skills.{{id}}" value="{{value}}" min="0" max="3" data-dtype="Number"></div>{{/each}}</section>{{/each}}
+  </div>
+  <div class="cdc-identity"><p>Perícias: <strong>{{total}}</strong></p><label>Pontos reservados<input type="number" min="0" max="16" name="system.reservedPoints" value="{{s.reservedPoints}}" data-dtype="Number"></label></div>
+  {{#if warnings}}<aside class="cdc-notice">{{#each warnings}}<p>{{this}}</p>{{/each}}</aside>{{/if}}
+  <h2>Função e origem</h2>
+  <div class="cdc-grid">
+    <label>Função na companhia<select name="system.role">{{#each roles}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}</select></label>
+    <label>Especialidade<select name="system.specialty">{{#each specialties}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}</select></label>
+    <label>Origem cultural<select name="system.origin">{{#each origins}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}</select></label>
+    <label>Situação jurídica / cidadania<input name="system.background.citizenship" value="{{s.background.citizenship}}"></label>
+  </div>
+  <div class="cdc-checks"><label><input type="checkbox" name="system.specialtyUsed" {{checked s.specialtyUsed}}> Especialidade já usada nesta sessão</label><label><input type="checkbox" name="system.originUsed" {{checked s.originUsed}}> {{benefit}} já usado nesta aventura</label></div>
+  <div class="cdc-grid">
+    <label>Onde cresceu<input name="system.background.grewUp" value="{{s.background.grewUp}}"></label>
+    <label>Comunidade atual<input name="system.background.community" value="{{s.background.community}}"></label>
+    <label>Período da campanha<input name="system.background.period" value="{{s.background.period}}"></label>
+    <label>Línguas faladas<input name="system.background.languages" value="{{s.background.languages}}"></label>
+    <label>Leitura e escrita por língua<input name="system.background.literacy" value="{{s.background.literacy}}"></label>
+    <label>Costume ou experiência aprendida<input name="system.background.custom" value="{{s.background.custom}}"></label>
+    <label>Contato cultural<input name="system.background.contact" value="{{s.background.contact}}"></label>
+    <label>Lembrança de formação<input name="system.background.memory" value="{{s.background.memory}}"></label>
+  </div>
+  <h2>O que o trouxe ao caminho?</h2>
+  <div class="cdc-grid">
+    <label>Motivação<textarea name="system.background.motivation">{{s.background.motivation}}</textarea></label>
+    <label>Tensão pessoal<textarea name="system.background.tension">{{s.background.tension}}</textarea></label>
+    <label>Dois traços<textarea name="system.background.traits">{{s.background.traits}}</textarea></label>
+    <label>Vínculos<textarea name="system.background.bonds">{{s.background.bonds}}</textarea></label>
+    <label>Papel nesta jornada<input name="system.background.journeyRole" value="{{s.background.journeyRole}}"></label>
+    <label>Patrono ou contato / como alcançá-lo<input name="system.background.patron" value="{{s.background.patron}}"></label>
+  </div>
+  <label>Equipamento e recursos coletivos<textarea name="system.background.equipment">{{s.background.equipment}}</textarea></label>
+  <label>Anotações<textarea name="system.background.notes">{{s.background.notes}}</textarea></label>
+  <h2>Entre os acontecimentos</h2>
+  <div class="cdc-actions"><button type="button" data-action="rest" data-kind="shelter">Noite abrigada</button><button type="button" data-action="rest" data-kind="rough">Noite precária</button><button type="button" data-action="rest" data-kind="community">Intervalo comunitário</button></div>
+  <div class="cdc-actions"><button type="button" data-action="reset" data-kind="session">Nova sessão</button><button type="button" data-action="reset" data-kind="adventure">Nova aventura</button></div>
+  <p class="cdc-hint">Confirme com a narradora que o período transcorreu. Carga é informada manualmente; não há combate automatizado. Ferimentos e Abalado não aplicam penalidades automáticas.</p>
+  </fieldset>
+  {{#if isGM}}<button type="button" data-action="example">Criar cópia do comerciante de exemplo</button>{{/if}}
+</section>
