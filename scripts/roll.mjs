@@ -2,19 +2,15 @@ import {ID,SKILLS,ORIGINS,ROLES,planRoll,resolve,featLabel,featRank} from './rul
 const busy=new Set();
 export const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function dieIcon(faces,value,{selected=false,discarded=false,muted=false,six=false}={}) {
-  const special=faces===12?(value===12?'✦':value===11?'◉':value):value;
   const label=faces===12?featLabel(value):String(value);
-  const shape=faces===12
-    ? '<polygon points="32,2 50,8 62,25 58,46 43,60 21,60 6,46 2,25 14,8"/><path d="M32 15 48 27 42 46 22 46 16 27Z M32 2V15 M62 25 48 27 M43 60 42 46 M6 46 22 46 M14 8 16 27"/>'
-    : '<path d="M8 20 22 8H56V42L42 54H8Z"/><path d="M8 20H42V54 M42 20 56 8"/>';
-  return `<span class="cdc-die-icon d${faces} ${selected?'selected':''} ${discarded?'discarded':''} ${muted?'muted':''} ${six?'six':''}" role="img" aria-label="d${faces}: ${escapeHTML(label)}${selected?', escolhido':''}${discarded?', descartado':''}" title="d${faces}: ${escapeHTML(label)}"><span class="cdc-die-face"><svg class="cdc-die-geometry" viewBox="0 0 64 64" aria-hidden="true" focusable="false">${shape}</svg><span class="cdc-die-value">${special}</span></span><small>d${faces}</small></span>`;
+  return `<span class="cdc-die-number ${selected?'selected':''} ${discarded?'discarded':''} ${muted?'muted':''} ${six?'six':''}" aria-label="d${faces}: ${escapeHTML(label)}${selected?', escolhido':''}${discarded?', descartado':''}" title="d${faces}: ${escapeHTML(label)}"><strong>${value}</strong><small>d${faces}</small>${selected?'<small>escolhido</small>':''}${discarded?'<small>descartado</small>':''}</span>`;
 }
 const check=(name,label,icon,detail,disabled=false)=>`<label class="cdc-option ${disabled?'unavailable':''}"><input type="checkbox" name="${name}" ${disabled?'disabled':''}><span class="cdc-option-icon" aria-hidden="true">${icon}</span><span><strong>${label}</strong><small>${detail}</small></span></label>`;
 async function chooseFeat(feats) {
   if(feats.length===1)return 0;
   const result=await foundry.applications.api.DialogV2.wait({window:{title:'Escolha sua façanha'},classes:['cdc-choice-dialog'],
-    content:`<p class="cdc-choice-heading">Escolha um d12</p><div class="cdc-feat-choices">${feats.map((n,i)=>`<label class="cdc-feat-choice"><input type="radio" name="chosen" value="${i}" ${i===0?'checked':''}>${dieIcon(12,n)}</label>`).join('')}</div>`,rejectClose:false,
-    buttons:[{action:'choose',label:'Escolher',default:true,callback:(_event,button)=>Number(button.form.elements.chosen.value)}]});
+    content:'<p>Escolha o resultado do d12.</p>',rejectClose:false,
+    buttons:feats.map((n,i)=>({action:`die${i}`,label:`d12: ${n}`,callback:()=>i}))});
   // Closing cannot discard an evaluated test or refund a used resource.
   return Number.isInteger(result)?result:feats.indexOf([...feats].sort((a,b)=>featRank(b)-featRank(a))[0]);
 }

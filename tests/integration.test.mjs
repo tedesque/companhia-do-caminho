@@ -92,18 +92,16 @@ test('Chat conserva os dois d12 com escolhido e descartado e identifica a quanti
   assert.equal(a.system.hope.value,12);assert.equal(a.system.specialtyUsed,true);
 });
 
-test('Escolha usa HTML no conteúdo e rótulo de botão em texto simples',async()=>{
+test('Escolha usa dois botões com tipo e número em texto simples',async()=>{
   const a=actor();setup(a);dialogs.push({specialty:true,modifier:0},1);dice.push({feats:[3,8],dice:[2,2,2]});
   await rollSkill(a,'persuade');const choice=dialogConfigs[1];
-  assert.match(choice.content,/type="radio" name="chosen" value="0"/);
-  assert.match(choice.content,/d12: 3/);assert.match(choice.content,/d12: 8/);
-  assert.equal(choice.buttons[0].label,'Escolher');
-  assert.equal(choice.buttons[0].callback(null,{form:{elements:{chosen:{value:'1'}}}}),1);
+  assert.deepEqual(choice.buttons.map(b=>b.label),['d12: 3','d12: 8']);
+  assert.equal(choice.buttons[0].callback(),0);assert.equal(choice.buttons[1].callback(),1);
   assert.equal(chats[0].data.flags['companhia-do-caminho'].chosen,1);
 });
-test('D12 e d6 possuem geometria de faces e valor separado acessível',()=>{
-  for(const faces of [12,6]){
-    const icon=dieIcon(faces,4);assert.match(icon,/viewBox="0 0 64 64"/);
-    assert.match(icon,/class="cdc-die-value">4/);assert.match(icon,/<path /);
+test('Dados exibem apenas números e tipo, sem SVG nem símbolos gráficos',()=>{
+  for(const faces of [12,6])for(const value of [1,6,11,12]){
+    const icon=dieIcon(faces,value);assert.match(icon,new RegExp(`<strong>${value}</strong><small>d${faces}</small>`));
+    assert.doesNotMatch(icon,/<svg|<path|cdc-die-face|✦|◉/);
   }
 });
