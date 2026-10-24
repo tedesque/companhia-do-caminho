@@ -22,7 +22,7 @@ export class CharacterSheet extends foundry.applications.api.HandlebarsApplicati
     if(!this.isEditable)return;await this.submit();
     const kind=target.dataset.kind;
     const label={shelter:'Noite com abrigo, água e alimento: +4 Resistência e −1 Fadiga.',rough:'Noite precária: +2 Resistência; mantém Fadiga.',community:'Intervalo comunitário efetivo: restaura Resistência e Esperança e zera Fadiga.'}[kind];
-    const yes=await foundry.applications.api.DialogV2.confirm({window:{title:'Aplicar recuperação'},content:`<p>${label}</p><p>Aplique uma vez por período realmente transcorrido, conforme combinado com a narradora. Ferimentos não são curados.</p>`,rejectClose:false});
+    const yes=await foundry.applications.api.DialogV2.confirm({window:{title:'Aplicar recuperação'},content:`<p>${label}</p><p>Aplicar recuperação deste período? Ferimentos não são removidos.</p>`,rejectClose:false});
     if(!yes)return;
     const result=recovery(this.document.system,kind);
     await this.document.update({'system.resistance.value':result.resistance,'system.hope.value':result.hope,'system.fatigue':result.fatigue});

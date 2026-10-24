@@ -1,6 +1,6 @@
 # Companhia do Caminho — Foundry VTT
 
-Versão do pacote: **0.1.1 — protótipo**. Base de regras: **croqui 0.3**.
+Versão do pacote: **0.1.2 — protótipo**. Base de regras: **croqui 0.3**.
 Alvo de compatibilidade: **Foundry VTT 14 Stable, Build 360**.
 
 O pacote é um sistema de jogo próprio. É selecionado ao criar um mundo; não aparece na lista de módulos adicionais de um mundo que usa outro sistema.
@@ -124,3 +124,12 @@ Preparação local sem publicação: `python3 tools/build_release.py --repositor
 ## Correção 0.1.1
 
 Corrige a ausência do campo de referência de compatibilidade. O core retorna UNKNOWN quando verified está ausente; esse estado impede selecionar o sistema para criar um mundo. A referência 14.1 foi escolhida para manter a indicação de build não verificado em builds reais V14 (incluindo 14.369), sem declarar a validação de um build específico. Regras e dados de personagens permanecem iguais.
+
+
+## Interface 0.1.2
+
+Dados do chat identificados por tipo (d12 de façanha e d6 de sucesso), com desenhos geométricos, símbolos especiais e destaque do d12 escolhido. O segundo d12 permanece visível e apagado. Os botões de escolha também usam os desenhos dos dados.
+
+Esperança, Especialidade e Origem aparecem como opções compactas com ícones e rótulos; Origem/experiência, Apoio e Visibilidade ficam em seções expansíveis. Para usar a origem, abra sua seção e informe a experiência. Os controles de seleção têm marca centralizada. Textos sobre o teste e instruções à narradora foram removidos da interface. Fichas existentes e histórico do chat são preservados; cartões antigos mantêm seu conteúdo original. As novas opções afetam apenas rolagens futuras.
+
+Os campos pessoais de personagens existentes não são apagados: se você guardou anotações da aventura ali, pode editá-las. Personagens pré-definidos novos não recebem mais as anotações do beta-teste. A validação visual dentro do seu Foundry ainda deve ser confirmada após a atualização.

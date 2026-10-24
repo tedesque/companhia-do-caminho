@@ -3,7 +3,7 @@ import {CharacterModel} from './model.mjs';
 import {CharacterSheet} from './sheet.mjs';
 import {rollSkill} from './roll.mjs';
 export async function createExample() {
-  if(!game.user.isGM)return ui.notifications.warn('A narradora cria o exemplo.');
+  if(!game.user.isGM)return ui.notifications.warn('Somente o GM pode criar este personagem.');
   const response=await fetch(`systems/${ID}/examples/comerciante.json`);
   if(!response.ok)throw Error('Não foi possível carregar o personagem de exemplo.');
   const data=await response.json();
@@ -19,7 +19,7 @@ Hooks.once('ready',async()=>{
   if(!game.user.isGM||game.settings.get(ID,'welcomed'))return;
   try {
     const yes=await foundry.applications.api.DialogV2.confirm({window:{title:'Bem-vindo à Companhia do Caminho'},
-      content:'<p>Protótipo 0.1, baseado nas regras domésticas 0.3. Deseja criar o comerciante usado no teste?</p><p>A ficha também permite criar outras cópias depois.</p>',rejectClose:false});
+      content:'<p>Deseja criar um comerciante pré-definido?</p><p>Você pode personalizar nome, origem e habilidades na ficha.</p>',rejectClose:false});
     if(yes)await createExample();
     await game.settings.set(ID,'welcomed',true);
   }catch(error){console.error(ID,error);ui.notifications.error(error.message);}

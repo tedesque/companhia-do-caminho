@@ -1,9 +1,9 @@
-# Validação — Companhia do Caminho 0.1.1
+# Validação — Companhia do Caminho 0.1.2
 
 Alvo: Foundry VTT 14 Stable — Build 360.
 Base mecânica: croqui Companhia do Caminho 0.3.
 
-Resultado: 25 testes automatizados passaram, zero falhas.
+Resultado: 27 testes automatizados passaram, zero falhas.
 
 13 testes de regras: dados especiais, graus de sucesso, condição Cansado, alvos, Esperança, origens, especialidade, recuperação, valores inválidos e pontos reservados.
 12 testes com substitutos da API: registro do sistema, modelo, dados derivados, contexto da ficha, cancelamento, recursos, escolha de dado, benefícios e apoio.

@@ -1,7 +1,7 @@
 <section class="cdc-body">
-  <header class="cdc-hero"><div class="cdc-eyebrow">COMPANHIA DO CAMINHO · PROTÓTIPO 0.1</div>
-    <h1>{{actor.name}}</h1><p>Uma companhia. Um caminho. Pessoas a quem servir.</p>
-    <div class="cdc-badges"><span>Regras 0.3</span>{{#if weary}}<strong class="cdc-warning">Cansado</strong>{{/if}}{{#if incapacitated}}<strong class="cdc-warning">Incapacitado para esforço</strong>{{/if}}</div>
+  <header class="cdc-hero"><div class="cdc-eyebrow">COMPANHIA DO CAMINHO</div>
+    <h1>{{actor.name}}</h1>
+    <div class="cdc-badges">{{#if weary}}<strong class="cdc-warning">Cansado</strong>{{/if}}{{#if incapacitated}}<strong class="cdc-warning">Incapacitado para esforço</strong>{{/if}}</div>
   </header>
   <fieldset {{#if readOnly}}disabled{{/if}}>
   <div class="cdc-identity">
@@ -16,7 +16,7 @@
     <label>Fadiga<input type="number" min="0" name="system.fatigue" value="{{s.fatigue}}" data-dtype="Number"></label>
   </div>
   <p class="cdc-hint">Cansado quando Resistência ≤ Carga + Fadiga. Nesse estado, 1–3 nos d6 valem zero.</p>
-  <div class="cdc-checks"><label><input type="checkbox" name="system.shaken" {{checked s.shaken}}> Abalado (narrativo)</label><label><input type="checkbox" name="system.wounded" {{checked s.wounded}}> Ferido (regra pendente)</label></div>
+  <div class="cdc-checks"><label><input type="checkbox" name="system.shaken" {{checked s.shaken}}> Abalado</label><label><input type="checkbox" name="system.wounded" {{checked s.wounded}}> Ferido</label></div>
   <h2>Atributos e perícias</h2><p class="cdc-hint">Clique no nome da perícia para rolar. Número-alvo = 20 − atributo.</p>
   <div class="cdc-columns">
     {{#each attributes}}<section class="cdc-attribute"><div class="cdc-attribute-head"><h3>{{label}}</h3><input aria-label="{{label}}" type="number" min="0" max="10" name="system.attributes.{{key}}" value="{{value}}" data-dtype="Number"><span>Alvo <b>{{target}}</b></span></div>
@@ -56,7 +56,7 @@
   <h2>Entre os acontecimentos</h2>
   <div class="cdc-actions"><button type="button" data-action="rest" data-kind="shelter">Noite abrigada</button><button type="button" data-action="rest" data-kind="rough">Noite precária</button><button type="button" data-action="rest" data-kind="community">Intervalo comunitário</button></div>
   <div class="cdc-actions"><button type="button" data-action="reset" data-kind="session">Nova sessão</button><button type="button" data-action="reset" data-kind="adventure">Nova aventura</button></div>
-  <p class="cdc-hint">Confirme com a narradora que o período transcorreu. Carga é informada manualmente; não há combate automatizado. Ferimentos e Abalado não aplicam penalidades automáticas.</p>
+  <p class="cdc-hint">Carga informada manualmente. O repouso não remove Ferido.</p>
   </fieldset>
-  {{#if isGM}}<button type="button" data-action="example">Criar cópia do comerciante de exemplo</button>{{/if}}
+  {{#if isGM}}<button type="button" data-action="example">Criar personagem pré-definido</button>{{/if}}
 </section>

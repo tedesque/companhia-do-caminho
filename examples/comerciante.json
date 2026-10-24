@@ -1,5 +1,5 @@
 {
-  "name": "Comerciante de tecidos — nome a definir",
+  "name": "Comerciante de tecidos",
   "type": "personagem",
   "img": "icons/svg/mystery-man.svg",
   "system": {
@@ -53,7 +53,7 @@
       "motivation": "Após ouvir a pregação dos apóstolos e viver uma experiência pessoal com o Espírito Santo, decidiu colocar suas capacidades a serviço da comunidade.",
       "tension": "Ao afastar-se da banca, teme ficar sem sustento e vive com sensação de insegurança.",
       "equipment": "Conjunto básico (Carga 5): roupa, calçado, bolsa, recipiente de água, manta, comida para três dias e ferramentas simples. Quantidades consumidas durante a aventura são anotadas manualmente.",
-      "notes": "Nome e dois traços ainda a escolher. Dois pontos escolhidos como Subterfúgio permanecem reservados: esse nome não existe na lista 0.3; decidir com o jogador antes de distribuir. Ofício manual corresponde a Ofício 1. Estado após Uma manta antes da noite: Resistência 28, Esperança 12, Fadiga 0. Costume aprendido para o benefício cultural ainda deve ser definido."
+      "notes": ""
     }
   }
 }

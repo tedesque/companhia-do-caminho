@@ -75,3 +75,19 @@ test('Contexto da ficha oferece as 18 perícias e mostra pendência de criação
   const a=actor();setup(a);const sheet=new CharacterSheet();sheet.document=a;sheet.isEditable=true;
   const ctx=await sheet._prepareContext({});assert.equal(ctx.attributes.flatMap(a=>a.skills).length,18);assert.equal(ctx.warnings.length,1);assert.equal(ctx.weary,false);
 });
+
+const {dieIcon}=await import('../scripts/roll.mjs');
+test('Ícones identificam d12 e d6, símbolos especiais e seleção sem depender só de cor',()=>{
+  assert.match(dieIcon(12,9,{selected:true}),/aria-label="d12: 9, escolhido"/);
+  assert.match(dieIcon(12,11,{discarded:true}),/aria-label="d12: Olho \(0\), descartado"/);
+  assert.match(dieIcon(12,12),/Êxito/);
+  assert.match(dieIcon(6,6,{six:true}),/d6: 6/);
+});
+test('Chat conserva os dois d12 com escolhido e descartado e identifica a quantidade de d6',async()=>{
+  const a=actor();setup(a);dialogs.push({specialty:true,modifier:0},0);dice.push({feats:[9,11],dice:[5,2,2]});
+  await rollSkill(a,'persuade');const content=chats[0].data.content;
+  assert.match(content,/Façanha · 2d12/);assert.match(content,/Sucesso · 3d6/);
+  assert.match(content,/d12: 9, escolhido/);assert.match(content,/d12: Olho \(0\), descartado/);
+  assert.doesNotMatch(content,/narradora|Consequências de falha/);
+  assert.equal(a.system.hope.value,12);assert.equal(a.system.specialtyUsed,true);
+});

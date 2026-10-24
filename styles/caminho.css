@@ -41,3 +41,35 @@
 .cdc-dice{display:flex;flex-wrap:wrap;gap:5px}.cdc-die{display:inline-block;min-width:28px;text-align:center;background:#fff;border:1px solid #c3b99e;padding:4px;border-radius:4px}
 .cdc-die.six{background:#deebcd;font-weight:bold}.cdc-die.muted{color:#8a6356;background:#eee4d9}
 @media(max-width:640px){.cdc-columns{grid-template-columns:1fr}.cdc-grid,.cdc-identity{grid-template-columns:1fr}.cdc-resources{grid-template-columns:repeat(2,1fr)}}
+/* Visual controls: remove Foundry's checkbox decoration before drawing one centered mark. */
+.cdc-checks label{display:inline-flex;align-items:center;gap:8px;line-height:1.35;margin:0 0 8px}
+.cdc-sheet .cdc-checks input[type=checkbox],.cdc-dialog .cdc-option input[type=checkbox]{appearance:none!important;-webkit-appearance:none!important;display:inline-grid!important;place-items:center!important;position:static!important;transform:none!important;flex:0 0 20px!important;width:20px!important;height:20px!important;padding:0!important;margin:0!important;border:1.5px solid #8c967e!important;border-radius:5px!important;background:#fffdf6!important;box-shadow:none!important;filter:none!important;vertical-align:middle}
+.cdc-checks input[type=checkbox]::before,.cdc-option input[type=checkbox]::before{content:none!important}
+.cdc-checks input[type=checkbox]::after,.cdc-option input[type=checkbox]::after{content:none!important;position:static!important;transform:none!important;width:auto!important;height:auto!important}
+.cdc-sheet .cdc-checks input[type=checkbox]:checked,.cdc-dialog .cdc-option input[type=checkbox]:checked{background:#36583c!important;border-color:#36583c!important}
+.cdc-checks input[type=checkbox]:checked::after,.cdc-option input[type=checkbox]:checked::after{content:'✓'!important;font:700 15px/1 Arial!important;color:white!important;display:block!important}
+.cdc-checks input[type=checkbox]:focus-visible,.cdc-option input[type=checkbox]:focus-visible{outline:2px solid #bca16c!important;outline-offset:3px}
+.cdc-roll-dialog{--cdc-dialog-border:#9eaa8d}
+.cdc-roll-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
+.cdc-dialog .cdc-option{display:flex;align-items:center;gap:8px;position:relative;padding:12px 9px;border:1px solid var(--cdc-dialog-border,#9eaa8d);border-radius:9px;cursor:pointer;margin:0;background:rgba(130,145,105,.08)}
+.cdc-dialog .cdc-option>span:last-child{display:flex;flex-direction:column;gap:4px;line-height:1.3}
+.cdc-option strong{font-size:12px}.cdc-option small{font-size:11px;opacity:.8}.cdc-option-icon{font-size:24px;line-height:1}
+.cdc-dialog .cdc-option:has(input:checked){border-color:#bba265;background:rgba(174,153,94,.2);box-shadow:inset 0 0 0 1px #bba265}
+.cdc-option.unavailable{opacity:.45;cursor:not-allowed}
+.cdc-more{border-top:1px solid #8c967e55;padding:10px 0}.cdc-more summary{cursor:pointer;font-size:12px;font-weight:600;list-style-position:inside}.cdc-more label{font-size:12px}
+.cdc-roll-context label{font-size:12px}.cdc-roll-dialog .window-content{padding:16px}
+.cdc-dice-group{margin:12px 0}.cdc-dice-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;color:#54634c}
+.cdc-die-icon{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex:none;color:#354532}
+.cdc-die-icon .cdc-die-face{display:grid;place-items:center;font:bold 21px/1 Georgia,serif;width:44px;height:44px;background:#fffcf2;border:1px solid #b7b09b;box-sizing:border-box}
+.cdc-die-icon small{display:block;font:10px/1.5 Arial,sans-serif;margin-top:3px}
+.cdc-die-icon.d12 .cdc-die-face{width:58px;height:58px;clip-path:polygon(50% 0,75% 7%,93% 25%,100% 50%,93% 75%,75% 93%,50% 100%,25% 93%,7% 75%,0 50%,7% 25%,25% 7%);background:#e2e7d8;border:0}
+.cdc-die-icon.d6 .cdc-die-face{border-radius:6px;border-right:4px solid #b7b09b;border-bottom:4px solid #b7b09b}
+.cdc-die-icon.selected .cdc-die-face{background:#35583f;color:white}.cdc-die-icon.selected small{font-weight:bold;color:#35583f}
+.cdc-die-icon.discarded{opacity:.4}.cdc-die-icon.discarded .cdc-die-face{background:#d8d5cc;color:#5d625a}
+.cdc-die-icon.six .cdc-die-face{background:#e5edce;border-color:#a3b17a;color:#35583f}
+.cdc-die-icon.muted .cdc-die-face{color:#927c6c;background:#eee8dd;text-decoration:line-through}
+.cdc-die-result{display:flex;flex-direction:column;align-items:center}.cdc-zero{font-size:10px;color:#8b523f}
+.cdc-choice-dialog .cdc-choice-heading{text-align:center;font-size:13px}.cdc-choice-dialog .dialog-buttons{justify-content:center;gap:20px}
+.cdc-choice-dialog .dialog-buttons button{height:auto;min-height:92px;padding:10px 20px;flex:0 1 130px;background:transparent;border:1px solid #879777;border-radius:12px}
+.cdc-choice-dialog .dialog-buttons button:hover{background:rgba(174,153,94,.2);border-color:#bba265}
+@media(max-width:520px){.cdc-roll-options{grid-template-columns:1fr}.cdc-dialog .cdc-option{padding:10px}}
