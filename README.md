@@ -69,7 +69,7 @@ Este pacote é uma implementação doméstica do croqui Companhia do Caminho. N�
 
 A lógica de regras e as integrações foram verificadas por testes Node.js. Os testes de integração usam substitutos controlados da API, não uma instalação real do Foundry. Sem acesso ao seu servidor nem a uma distribuição licenciada do Build 360 neste ambiente, **a instalação, a renderização real da ficha e o funcionamento ponta a ponta no Build 360 continuam pendentes**.
 
-O manifesto informa minimum 14, maximum 14 e verified 14.0. Esse valor de referência mantém os builds reais da versão 14 no estado UNVERIFIED_BUILD, em vez de UNKNOWN, permitindo criar mundos com o protótipo sem declarar um build real como validado. A execução no aplicativo continua pendente; um aviso de build não verificado é esperado. A documentação pública da API consultada é da linha 14; diferenças entre builds podem precisar de um pequeno ajuste.
+O manifesto informa minimum 14, maximum 14 e verified 14.1. Esse valor de referência mantém os builds reais da versão 14 no estado UNVERIFIED_BUILD, em vez de UNKNOWN, permitindo criar mundos com o protótipo sem declarar um build real como validado. A execução no aplicativo continua pendente; um aviso de build não verificado é esperado. A documentação pública da API consultada é da linha 14; diferenças entre builds podem precisar de um pequeno ajuste.
 
 Ao atualizar, mantenha uma cópia do mundo e substitua a pasta do sistema com o Foundry encerrado. Esta é a primeira versão; não há migração de fichas de outro sistema.
 
@@ -123,4 +123,4 @@ Preparação local sem publicação: `python3 tools/build_release.py --repositor
 
 ## Correção 0.1.1
 
-Corrige a ausência do campo de referência de compatibilidade. O core retorna UNKNOWN quando verified está ausente; esse estado impede selecionar o sistema para criar um mundo. A referência 14.0 foi escolhida para manter a indicação de build não verificado em builds reais V14 (incluindo 14.369), sem declarar a validação de um build específico. Regras e dados de personagens permanecem iguais.
+Corrige a ausência do campo de referência de compatibilidade. O core retorna UNKNOWN quando verified está ausente; esse estado impede selecionar o sistema para criar um mundo. A referência 14.1 foi escolhida para manter a indicação de build não verificado em builds reais V14 (incluindo 14.369), sem declarar a validação de um build específico. Regras e dados de personagens permanecem iguais.
